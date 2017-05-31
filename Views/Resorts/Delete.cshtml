@@ -1,0 +1,28 @@
+﻿@model HoidayResorts.Data_Entities.Resort
+
+@{
+    ViewBag.Title = "Delete";
+}
+<hr class="space" />
+<div class="box-semi" data-aos="zoom-in">
+    <h2 class="margin-align">Delete Resort</h2>
+    <hr/>
+    <div class="box">
+        <h3>Are you sure you want to delete this resort?</h3>
+
+        <div>
+            <h4>@Model.Name, @Model.Country</h4>
+            <p>Number of reviews: @Model.Reviews.Count()</p>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-warning light-shadow"/> 
+                @Html.ActionLink("Cancel", "Details", new { id = Model.Id }, new { @class = "btn btn-primary light-shadow" })
+            </div>
+        }
+    </div>
+</div>

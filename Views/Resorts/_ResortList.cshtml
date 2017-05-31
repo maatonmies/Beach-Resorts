@@ -1,0 +1,26 @@
+﻿@model IPagedList<ResortViewModel>
+
+<div id="resortList">
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4">
+                @Html.Partial("_ResortSummary", item)
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="pagedList margin-align" data-update-target="#resortList">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                    PagedListRenderOptions.PageNumbersOnly)
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,40 @@
+﻿@model HoidayResorts.Data_Entities.Review
+
+    <div class="box">
+        <h4><b>@Model.Title</b></h4>
+        
+        <p><span><b>@Model.Rating</b></span>
+            @{
+
+                double nrOfStars = Math.Round((double) Model.Rating / 2, 1);
+
+                if (nrOfStars % 1 == 0)
+                {
+                    for (int i = 0; i < nrOfStars; i++)
+                    {
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    }
+                }
+                else
+                {
+                    int whole = (int) nrOfStars;
+
+                    for (int i = 0; i < whole; i++)
+                    {
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    }
+
+                    <i class="fa fa-star-half" aria-hidden="true"></i>
+                }
+            }</p>
+
+        <p>@Model.ReviewText</p>
+        <p><i>@Model.ReviewerName</i></p>
+        
+
+            <p>
+                @Html.ActionLink("Edit", "Edit", "Reviews", new { id = Model.Id },null) |
+                @Html.ActionLink("Delete", "Delete", "Reviews", new { id = Model.Id},null)
+            </p>
+
+    </div>

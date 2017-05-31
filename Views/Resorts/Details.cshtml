@@ -1,0 +1,109 @@
+﻿@model HoidayResorts.Models.ResortViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<hr class="space"/>
+    <div class="box-semi" data-aos="flip-up">
+        <div class="row box resort-bg" style="background-image: url(@Model.ImageUrl);">
+            <div class="col-md-4 col-xs-12">
+            
+                <div class="box">
+                    <p class="text-left">
+                        @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = Model.Id})
+                    </p>
+
+                    <h3 class="display-font">@Model.Name</h3>
+                    <h4> @Model.Location, @Model.Country</h4>
+
+                    @*Stars*@
+                    <div style="margin-bottom: 1em;">
+                        @{
+                            if (Model.CountOfReviews > 0)
+                            {
+                                if (Model.OverallRating != null)
+                                {
+
+                                    var nrOfStars = Math.Round((double) Model.OverallRating / 2, 1);
+
+                                    if (nrOfStars % 1 == 0)
+                                    {
+                                        for (var i = 0; i < nrOfStars; i++)
+                                        {
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var whole = (int) nrOfStars;
+
+                                        for (var i = 0; i < whole; i++)
+                                        {
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        }
+
+                                        <i class="fa fa-star-half" aria-hidden="true"></i>
+                                    }
+
+                                    <span>(@Model.CountOfReviews)</span>
+                                }
+                            }
+                            else
+                            {
+                                <p>
+                                    <b>Not yet rated</b>
+                                </p>
+                            }
+                        }
+                    </div>                  
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<div class="row box-semi" data-aos="flip-left">
+        <div class="col-md-6">
+            <h2 class="margin-align">About</h2>  
+
+            <div class="box">
+                <div class="text-justify">@Html.Raw(Model.Description.Replace("\n", "<br/>"))</div>
+                <br/>
+                <p>Rooms available from <b>£@Model.CheapestRoom</b> / night</p>
+            </div>           
+
+        </div>
+        
+        <div class="col-md-6">
+            <div class="margin-align">
+                <h2>Reviews</h2>
+
+                @{
+                    if (Model.Reviews.Count == 0)
+                    {
+                        <p>Be the first to review this resort!</p>
+                    }
+                }
+                <div>
+                    <p>
+                        @Html.ActionLink("Add New Review", "Create", "Reviews", new { resortId = Model.Id }, new { @class = "btn btn-primary light-shadow" })
+                    </p>
+                </div>
+            </div>
+           
+            <div class="review-box">              
+                @foreach (var item in Model.Reviews.OrderByDescending(review => review.Id))
+                {
+                    @Html.Partial("../Reviews/_Review",item)
+                }
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+

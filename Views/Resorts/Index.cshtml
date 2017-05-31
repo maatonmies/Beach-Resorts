@@ -1,0 +1,36 @@
+﻿@model IPagedList<ResortViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<hr class="space" />
+<div class="box-semi" data-aos="flip-up">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="margin-align">List of all Resorts</h2>
+
+            <div class=" row margin-align">
+                @Html.ActionLink("Add New Resort", "Create", null, new { @class = "btn btn-primary" })
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6" data-aos="flip-down">
+        <form method="get" action="@Url.Action("Index")" data-ajax-submit="true" data-update-target="#resortList" class="form-inline margin-align search">
+            <input name="searchTerm" class="form-control light-shadow" type="search" placeholder="Destination, property name, etc" data-autocomplete-action="@Url.Action("Autocomplete")"  />
+            <input id="searchBtn" class="btn btn-warning light-shadow" type="submit" value="Search"  />
+        </form>
+    </div>
+</div>
+
+<hr />
+
+@Html.Partial("_ResortList", Model)
+
+
+
+
+

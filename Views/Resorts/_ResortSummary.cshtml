@@ -1,0 +1,52 @@
+﻿@model HoidayResorts.Models.ResortViewModel
+
+<div class="resort-box" data-aos="flip-left">
+    <img class="img-responsive" alt="Resort Image" src="@Model.ImageUrl" />
+
+    <h4 class="display-font">@Model.Name</h4>
+
+    <div style="margin-bottom: 1em;">
+        @{
+            if (Model.CountOfReviews > 0)
+            {
+                if (Model.OverallRating != null)
+                {
+
+                    var nrOfStars = Math.Round((double)Model.OverallRating / 2, 1);
+
+                    if (nrOfStars % 1 == 0)
+                    {
+                        for (var i = 0; i < nrOfStars; i++)
+                        {
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        }
+                    }
+                    else
+                    {
+                        var whole = (int)nrOfStars;
+
+                        for (var i = 0; i < whole; i++)
+                        {
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        }
+
+                        <i class="fa fa-star-half" aria-hidden="true"></i>
+                    }
+
+                    <span>(@Model.CountOfReviews)</span>
+                }
+            }
+            else
+            {
+                    <b>Not yet rated</b>
+            }
+        }
+    </div>
+
+    <p><b>@Model.Country</b></p>
+    <p>From: <b>£@Model.CheapestRoom</b></p>
+
+    <span class="bottom-right">
+        @Html.ActionLink("Details", "Details", new { id = Model.Id }, new { @class = "display-font" })
+    </span>
+</div>
