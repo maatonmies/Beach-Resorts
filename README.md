@@ -1,2 +1,2 @@
-# Beach-Resorts
+# Beach Resorts
 Beach Resorts is an ASP.NET MVC mockup travel review site managing a two table SQL database. The user can search for popular holiday destinations from the database or search resorts by name, add new resorts, and reviews to any of them or edit / delete any existing entry. The overall rating of each resort is the average of their user-ratings represented by a 5 star rating system. The application makes heavy use of async requests (search autocomplete, Ajax form submission and validation), Partial View rendering, pagination and animations for a smooth user experience.
